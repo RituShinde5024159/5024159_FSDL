@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Age Calculator</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.container {
+    background: white;
+    color: black;
+    padding: 25px;
+    border-radius: 15px;
+    width: 360px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.result {
+    margin-top: 20px;
+    font-weight: bold;
+    animation: fadeIn 0.4s ease;
+}
+
+.extra {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.error {
+    color: red;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🎂 Smart Age Calculator</h2>
+    <p>Select your birth date 👇</p>
+
+    <input type="date" id="birthDate">
+
+    <div id="result" class="result">✨ Your age will appear here</div>
+    <div id="extra" class="extra"></div>
+</div>
+
+<script>
+const input = document.getElementById("birthDate");
+
+input.addEventListener("input", calculateAge);
+
+function calculateAge() {
+    try {
+        let value = input.value;
+        if (!value) {
+            document.getElementById("result").innerHTML = "✨ Your age will appear here";
+            document.getElementById("extra").innerHTML = "";
+            return;
+        }
+
+        let birthDate = new Date(value);
+        let today = new Date();
+
+        if (birthDate > today) {
+            throw new Error("Future date not allowed");
+        }
+
+        let years = today.getFullYear() - birthDate.getFullYear();
+        let months = today.getMonth() - birthDate.getMonth();
+        let days = today.getDate() - birthDate.getDate();
+
+        if (days < 0) {
+            months--;
+            let lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+            days += lastMonth.getDate();
+        }
+
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        // 🎯 Main result
+        document.getElementById("result").innerHTML =
+            `🎉 ${years} yrs, ${months} months, ${days} days`;
+
+        // 📊 Extra info
+        let totalDays = Math.floor((today - birthDate) / (1000 * 60 * 60 * 24));
+
+        // 🎂 Next birthday countdown
+        let nextBirthday = new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+        if (nextBirthday < today) {
+            nextBirthday.setFullYear(today.getFullYear() + 1);
+        }
+        let daysLeft = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
+
+        let extraText = `📅 Total days lived: ${totalDays} <br> 🎈 Days until next birthday: ${daysLeft}`;
+
+        // 🎂 Birthday today
+        if (daysLeft === 0) {
+            extraText += "<br> 🎉 HAPPY BIRTHDAY!!! 🎉";
+        }
+
+        document.getElementById("extra").innerHTML = extraText;
+
+    } catch (err) {
+        document.getElementById("result").innerHTML =
+            `<span class="error">⚠ ${err.message}</span>`;
+        document.getElementById("extra").innerHTML = "";
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration System</title>
+
+    <style>
+        /* ===== Background ===== */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ===== Glass Card ===== */
+        .box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            width: 320px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            text-align: center;
+            color: white;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        /* ===== Inputs ===== */
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 90%;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #00f2fe;
+        }
+
+        /* ===== Button ===== */
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 95%;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00f2fe;
+        }
+
+        /* ===== Error ===== */
+        .error {
+            color: #ff6b6b;
+            margin-top: 10px;
+        }
+
+        /* ===== Animation ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="box">
+    <h2>✨ Register User</h2>
+
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="number" id="age" placeholder="Enter Age">
+    <input type="text" id="email" placeholder="Enter Email">
+
+    <button onclick="registerUser()">🚀 Register</button>
+
+    <p class="error" id="errorMsg"></p>
+</div>
+
+<script>
+
+// ===== Array to store users =====
+let users = [];
+
+// ===== Validation + Error Handling =====
+function validate(name, age, email) {
+    try {
+        if (!name || !age || !email) {
+            throw "All fields are required!";
+        }
+
+        if (name.length < 3) {
+            throw "Name must be at least 3 characters!";
+        }
+
+        if (age <= 0 || isNaN(age)) {
+            throw "Invalid age!";
+        }
+
+        if (!email.includes("@") || !email.includes(".")) {
+            throw "Invalid email!";
+        }
+
+        return true;
+
+    } catch (err) {
+        document.getElementById("errorMsg").innerText = err;
+        return false;
+    }
+}
+
+// ===== Main Function =====
+function registerUser() {
+
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+    let email = document.getElementById("email").value;
+
+    if (!validate(name, age, email)) return;
+
+    // ===== String =====
+    let formattedName = name.toUpperCase();
+    let emailDomain = email.split("@")[1];
+
+    // ===== Date =====
+    let date = new Date().toLocaleString();
+
+    // ===== Array =====
+    let user = {
+        name: formattedName,
+        age: age,
+        email: email,
+        domain: emailDomain,
+        registeredOn: date
+    };
+
+    users.push(user);
+
+    console.log("All Users:", users);
+
+    alert(`✅ Registered Successfully!
+Name: ${formattedName}
+Domain: ${emailDomain}
+Date: ${date}`);
+
+    // Clear
+    document.getElementById("name").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("errorMsg").innerText = "";
+}
+
+</script>
+
+</body>
+</html>

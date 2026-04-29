@@ -1,0 +1,223 @@
+/* BODY */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #f7f9fc;
+  color: #333;
+}
+
+/* NAVBAR */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: #e3f2fd;
+  border-bottom: 2px solid #d0e7f9;
+}
+
+.nav h2 {
+  margin: 0;
+  color: #4a6fa5;
+}
+
+.links a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #4a6fa5;
+  font-weight: 500;
+}
+
+.links a:hover {
+  color: #2c4a7a;
+}
+
+/* HOME */
+.home {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.home-box {
+  background: #ffffff;
+  padding: 20px;
+  width: 300px;
+  margin: 20px auto;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+/* TABLE */
+table {
+  margin: auto;
+  border-collapse: collapse;
+  width: 70%;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+th {
+  background: #bbdefb;
+  padding: 12px;
+  color: #333;
+}
+
+td {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+/* FORM */
+.form {
+  text-align: center;
+  margin-top: 50px;
+}
+
+input {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 250px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* BUTTON */
+button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  background: #a5d6a7;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #81c784;
+}
+/* FORM CENTERING */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+/* FORM BOX */
+.form-box {
+  background: #ffffff;
+  padding: 30px;
+  width: 300px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+/* HEADING */
+.form-title {
+  margin-bottom: 20px;
+  color: #4a6fa5;
+}
+
+/* INPUT */
+.form-box input {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* BUTTON */
+.form-box button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #a5d6a7;
+  cursor: pointer;
+}
+
+.form-box button:hover {
+  background: #81c784;
+}
+/* DASHBOARD / STUDENT LIST */
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.table-box {
+  width: 80%;
+  text-align: center;
+}
+
+/* HEADING CENTER FIX */
+.table-title {
+  text-align: center;
+  color: #4a6fa5;
+  margin-bottom: 20px;
+}
+
+/* UNDERLINE EFFECT */
+.table-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #a5d6a7;
+  margin: 8px auto;
+  border-radius: 2px;
+}
+
+/* NO DATA TEXT */
+.no-data {
+  text-align: center;
+  color: #888;
+  font-size: 18px;
+}
+/* HOME SUBTITLE */
+.subtitle {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* CARD CONTAINER */
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* CARD DESIGN */
+.card {
+  background: #ffffff;
+  padding: 20px;
+  width: 220px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+/* HOVER EFFECT */
+.card:hover {
+  transform: translateY(-5px);
+  background: #f1f7ff;
+}
+
+/* CARD TEXT */
+.card h3 {
+  color: #4a6fa5;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #666;
+  font-size: 14px;
+}

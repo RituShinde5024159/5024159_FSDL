@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>College Admission Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #dbeeff, #b3daff);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: #0077cc;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #004080;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 18px 0;
+            border-radius: 6px;
+            border: 1px solid #99ccff;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #0077cc;
+            box-shadow: 0 0 5px rgba(0, 119, 204, 0.5);
+        }
+
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #3399ff, #0077cc);
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #0077cc, #005fa3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>College Admission Form</h2>
+    <form id="collegeForm">
+        
+        <label>Full Name</label>
+        <input type="text" id="name" required>
+        
+        <label>Email</label>
+        <input type="email" id="email" required>
+        
+        <label>Phone Number</label>
+        <input type="tel" id="phone" required>
+        
+        <label>Date of Birth</label>
+        <input type="date" id="dob" required>
+        
+        <label>Gender</label>
+        <select id="gender" required>
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+        
+        <label>Course</label>
+        <select id="course" required>
+            <option value="">Select Course</option>
+            <option>Information Technology</option>
+            <option>Computer Science</option>
+            <option>Electrical</option>
+            <option>Mechanical</option>
+            <option>Extc</option>
+        </select>
+
+        <label>Address</label>
+        <textarea id="address" required></textarea>
+
+        <div class="error" id="errorMsg"></div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+document.getElementById("collegeForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let phone = document.getElementById("phone").value.trim();
+    let dob = document.getElementById("dob").value;
+    let errorMsg = document.getElementById("errorMsg");
+
+    errorMsg.innerHTML = "";
+
+    let phonePattern = /^[0-9]{10}$/;
+    if (!phonePattern.test(phone)) {
+        errorMsg.innerHTML = "Phone number must be exactly 10 digits!";
+        return;
+    }
+
+    let today = new Date();
+    let birthDate = new Date(dob);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    if (age < 17) {
+        errorMsg.innerHTML = "You must be at least 17 years old!";
+        return;
+    }
+
+    alert("Form submitted successfully!");
+    document.getElementById("collegeForm").reset();
+});
+</script>
+
+</body>
+</html>

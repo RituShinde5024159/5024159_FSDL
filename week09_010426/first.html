@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Transformation Studio</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+.container {
+    max-width: 650px;
+    margin: auto;
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #22c55e;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #16a34a;
+}
+
+.card {
+    background: #1e293b;
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.error {
+    color: #f87171;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🎯 Number Transformation Studio</h2>
+    <p>Enter values (e.g., 5, 10, abc, 15)</p>
+
+    <input type="text" id="inputBox" placeholder="Enter numbers here">
+    <br>
+    <button onclick="processData()">Process</button>
+
+    <div id="output"></div>
+</div>
+
+<script>
+function processData() {
+    const output = document.getElementById("output");
+
+    try {
+        let input = document.getElementById("inputBox").value.trim();
+
+        if (!input) {
+            throw new Error("Please enter some values!");
+        }
+
+        let arr = input.split(',').map(v => v.trim());
+
+        let valid = arr.filter(v => !isNaN(v) && v !== "").map(Number);
+        let invalid = arr.filter(v => isNaN(v) || v === "");
+
+        if (valid.length === 0) {
+            throw new Error("No valid numbers found!");
+        }
+
+        // Transformations
+        let squared = valid.map(n => n * n);
+        let reversed = [...valid].reverse();
+
+        output.innerHTML = `
+            <div class="card">
+                🔢 <b>Input:</b> ${arr.join(', ')}
+            </div>
+
+            <div class="card">
+                ✅ <b>Valid Numbers:</b> ${valid.join(', ')}
+            </div>
+
+            <div class="card">
+                ❌ <b>Invalid Inputs:</b> ${invalid.length ? invalid.join(', ') : "None"}
+            </div>
+
+            <div class="card">
+                🔁 <b>Reversed:</b> ${reversed.join(', ')}
+            </div>
+
+            <div class="card">
+                ✨ <b>Squared Values:</b> ${squared.join(', ')}
+            </div>
+        `;
+
+    } catch (err) {
+        output.innerHTML = `<div class="card error">⚠ ${err.message}</div>`;
+    }
+}
+</script>
+
+</body>
+</html>
